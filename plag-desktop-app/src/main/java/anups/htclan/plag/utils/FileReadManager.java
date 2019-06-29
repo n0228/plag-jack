@@ -73,7 +73,7 @@ public class FileReadManager {
   }
   
  public void combinations() {
-	 Gson gson = new Gson();
+   Gson gson = new Gson();
    for(int i=0;i<FILE_CONTENT_TOTALWORDS;i++) {
 	for(int j=0;j<FILE_CONTENT_TOTALWORDS;j++) {
 	  if(i<=j) {
@@ -82,6 +82,8 @@ public class FileReadManager {
 			  sb.append(FILE_CONTENT_WORDS.get(k)).append(" ");
 		  }
 		  String combination = sb.toString().trim().replaceAll("\\p{Punct}","");
+		  // Combinations
+		  
 		  /* Duplicate Combination Exists */
 		  int comboRecognizerCount = 1;
 		  int comboRecognizerIndex = 0;
@@ -97,6 +99,15 @@ public class FileReadManager {
 		  FileReadWordPojo fileReadPojo = new FileReadWordPojo();
 		  fileReadPojo.setWordCount(comboRecognizerCount);
 		  fileReadPojo.setWord(combination);
+		  
+		  for(int index=0;index<FILE_CONTENT_LBLWORDCOUNT.size();index++) {
+			int lineNumber = (index+1);
+			int WordsInLine = FILE_CONTENT_LBLWORDCOUNT.get(index);
+			if(i<WordsInLine) {
+				System.out.println("combination: "+combination+" lineNumber: "+lineNumber+"WordsInLine:"+WordsInLine+" i:"+i+" j:"+j);
+			}
+			
+		  }
 		  /* Duplicate Combination Exists */
 		  if(comboRecognizerCount>1) {
 			  FILE_COMBO_CONTENT.set(comboRecognizerIndex, fileReadPojo);
